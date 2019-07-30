@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd 
 
 from gtal_config import ROOT_DIRECTORY
+from src.utils import draw_dienst, create_input_dict, update_participants
 
 def main_function_groups(programm_object,
                   participants):
@@ -30,12 +31,26 @@ def main_function_groups(programm_object,
 
 
 def main_dienste(participant_list,
-                 service_object):
+                 service_object,
+                 max_number):
     """
     This functio0n creates a full two week
      allocation of service duty.
     :return:
     """
-    service_object
+    out_keys = service_object.create_keys()
+    input_dict = create_input_dict(participant_list,
+                                   max_number)
+    out = dict()
+    for x in out_keys():
+        #TODO: sampling with replacement
+        out[x] = np.random.choice(participant_list,
+                               size = service_object.return_group_size(x))
+        participant_list = update_participants(out,
+                                               x,
+                                               participant_list)
 
-    pass
+
+
+    return out
+
