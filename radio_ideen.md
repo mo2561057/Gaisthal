@@ -5,6 +5,7 @@
 - Veränderung kultureller Angebote durch technologsichen Fortschritt  
 
 **Dienstag Konsum**
+
 -Bericht über neuen Möglichkeiten des Konsums durch technologischen
 und industriellen Fortschritt
  -Reflexion über die Veränderung des Alltags durch die zunehmende Kaufkraft der

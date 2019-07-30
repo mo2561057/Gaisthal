@@ -52,6 +52,8 @@ def get_all_days(service_dict):
 
 def group_size_dict(num_groups, num_participants):
     x = np.floor(num_participants/num_groups)
-
-    z =
-    while
+    z = x.sum()
+    #TODO: seems to be ad hoc maybe better way to do that
+    while z <= (x+1)*num_groups:
+        z = z+1
+    return z
