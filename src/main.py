@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd 
 
 from gtal_config import ROOT_DIRECTORY
-from src.utils import draw_dienst, create_input_dict, update_participants
+from src.utils import draw_dienst, create_input_dict, update_participants, return_dienst, get_all_days
 
 def main_function_groups(programm_object,
                   participants):
@@ -19,7 +19,7 @@ def main_function_groups(programm_object,
     as values
 
     """
-    group_list = prgramm_object.groups()
+    group_list = programm_object.groups()
 
 
     for x in group_list:
@@ -31,24 +31,29 @@ def main_function_groups(programm_object,
 
 
 def main_dienste(participant_list,
-                 service_object,
+                 service_dict,
                  max_number):
     """
     This functio0n creates a full two week
      allocation of service duty.
     :return:
     """
-    out_keys = service_object.create_keys()
+    #TODO: functions or just objects to keep data
+    out_keys = get_all_days(service_dict)
     input_dict = create_input_dict(participant_list,
-                                   max_number)
+                                   max_number
+                                   )
+
     out = dict()
     for x in out_keys():
         #TODO: sampling with replacement
-        out[x] = np.random.choice(participant_list,
-                               size = service_object.return_group_size(x))
-        participant_list = update_participants(out,
-                                               x,
-                                               participant_list)
+        dienst = return_dienst(x)
+        out[x] = np.random.choice(input_dict[dienst].keys(),
+                                  size = service_dict.return_group_size(x))
+        input_dict = update_participants(out,
+                                         x,
+                                         dienst,
+                                         input_dict)
 
 
 

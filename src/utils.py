@@ -6,10 +6,11 @@ import os
 import numpy as np
 import pandas as pd
 
-from gtal_config import ROOT_DITRECTORY
+from gtal_config import ROOT_DIRECTORY
 
 def update_participants(out,
                         x,
+                        dienst
                         participant_dict
                         ):
     """
@@ -29,7 +30,6 @@ def update_participants(out,
 
 def create_input_dict():
     pass
-
 def draw_dienst():
     """
 
@@ -37,3 +37,10 @@ def draw_dienst():
     """
     pass
 
+
+def return_dienst():
+    pass
+
+
+def get_all_days():
+    pass
