@@ -21,6 +21,7 @@ def main_function_groups(programm_dict,
     group_list = ["Group_{}".format(str(x)) for x in list(1,range(programm_dict["number_groups"]))]
     group_size_dict = group_size_dict(programm_dict["number_groups"],len(participants))
     for x in group_list:
+        
 
 
     out = dict()
