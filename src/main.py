@@ -4,11 +4,10 @@ This file contains the main code.
 import numpy as np 
 import pandas as pd 
 
-from gtal_config import ROOT_DIRECTORY
-from src.utils import draw_dienst, create_input_dict, update_participants, return_dienst, get_all_days
+from src.utils import create_input_dict, update_participants, return_dienst, get_all_days
 
-def main_function_groups(programm_object,
-                  participants):
+def main_function_groups(programm_dict,
+                         participants):
     """
     programm_object: This object contains all important information about the
     respective programm. It is an instance of the programm class
@@ -19,15 +18,13 @@ def main_function_groups(programm_object,
     as values
 
     """
-    group_list = programm_object.groups()
-
-
+    group_list = ["Group_{}".format(str(x)) for x in list(1,range(programm_dict["number_groups"]))]
+    group_size_dict = group_size_dict(programm_dict["number_groups"],len(participants))
     for x in group_list:
 
 
     out = dict()
     return out
-
 
 
 def main_dienste(participant_list,
@@ -36,7 +33,6 @@ def main_dienste(participant_list,
     """
     This functio0n creates a full two week
      allocation of service duty.
-    :return:
     """
     #TODO: functions or just objects to keep data
     out_keys = get_all_days(service_dict)
@@ -58,4 +54,3 @@ def main_dienste(participant_list,
 
 
     return out
-
