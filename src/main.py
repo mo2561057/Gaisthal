@@ -1,10 +1,17 @@
 """
 This file contains the main code. 
 """
-import numpy as np 
-import pandas as pd 
+import numpy as np
+import pandas as pd
 
-from src.utils import create_input_dict, update_participants, return_dienst, get_all_days
+from src.utils import (
+    create_input_dict,
+    update_participants,
+    return_dienst,
+    get_all_days,
+    group_size_dict
+)
+
 
 def main_function_groups(programm_dict,
                          participants):
@@ -18,13 +25,13 @@ def main_function_groups(programm_dict,
     as values
 
     """
-    group_list = ["Group_{}".format(str(x)) for x in list(1,range(programm_dict["number_groups"]))]
-    group_size_dict = group_size_dict(programm_dict["number_groups"],len(participants))
-    for x in group_list:
-        
 
-
+    group_list = ["Group_{}".format(str(x)) for x in list(1, range(programm_dict["number_groups"]))]
+    group_size_dict = group_size_dict(programm_dict["number_groups"], len(participants))
     out = dict()
+    for x in group_list:
+        # TODO: See how sampling with replacement would work
+        out[x] = np.random.choice(participants, size=group_size_dict[x])
     return out
 
 
@@ -35,7 +42,7 @@ def main_dienste(participant_list,
     This functio0n creates a full two week
      allocation of service duty.
     """
-    #TODO: functions or just objects to keep data
+    # TODO: functions or just objects to keep data
     out_keys = get_all_days(service_dict)
     input_dict = create_input_dict(participant_list,
                                    max_number
@@ -43,15 +50,13 @@ def main_dienste(participant_list,
 
     out = dict()
     for x in out_keys():
-        #TODO: sampling with replacement
+        # TODO: sampling with replacement
         dienst = return_dienst(x)
         out[x] = np.random.choice(input_dict[dienst].keys(),
-                                  size = service_dict.return_group_size(x))
+                                  size=service_dict.return_group_size(x))
         input_dict = update_participants(out,
                                          x,
                                          dienst,
                                          input_dict)
-
-
 
     return out
