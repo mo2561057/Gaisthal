@@ -13,7 +13,7 @@ def generate_groups(df, alloc_params, simulation_draws):
     optimal_value = HUGE_INT
     for x in range(simulation_draws):
         # Shuffle rows
-        index = df.sample(frac=1).index[np.arange(0, len(df), group_size)]
+        index = [df.sample(frac=1).index[x::group_size] for x in np.arange(0,len(df), group_size)]
         rslt = func_eval(index)
         if rslt < optimal_value:
             index.to_csv("result.csv")
@@ -26,6 +26,8 @@ def create_func(df, alloc_params):
     """
     value_list = [df[x].value_counts() / (len(df) / len(alloc_params["group_size"])) for x in
                   alloc_params["categorical"]]
+    #We need new variables to our dataframe
+    df = pd.concat([df]+[df.eval(x) for x in alloc_params["covariates"]])
 
     return partial(_objective,
                    df,
