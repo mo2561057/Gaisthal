@@ -6,6 +6,7 @@ import os
 import numpy as np
 import pandas as pd
 
+HUGE_INT = 10e5
 def update_participants(out,
                         x,
                         dienst,
