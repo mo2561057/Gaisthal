@@ -26,7 +26,15 @@ def _get_average_dist(x):
     pass
 
 def _update_cols(df, alloc_params):
-    pass
+    """
+    Parse Friend Groups that are specified in the options file!
+    :param df:
+    :param alloc_params:
+    :return:
+    """
+    for group in alloc_params["Friends"].keys():
+        df[group] = df[df.index.isin(alloc_params["Friends"][group])].astype(int)
+    return df
 
 def _get_average_size(x,len_tot, group_size):
     pass
