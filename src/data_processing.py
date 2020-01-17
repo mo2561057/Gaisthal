@@ -4,5 +4,7 @@ objects!
 """
 import pandas as pd
 
+
 def process_params_and_options(df, options):
-    pass
+    df = df.set_index(["Name"], drop = True)
+    return df
