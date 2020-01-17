@@ -18,7 +18,7 @@ def generate_groups(df, alloc_params, simulation_draws):
     :param simulation_draws: int indicating the number of times we check another spec
     :return:
         optimal_value: float containng the best value of the objective
-        optimal_specification: list containing lists of optimal groups
+        optimal_specification: list containing pd.indices of optimal groups
     """
     func_eval = create_func(df, alloc_params)
 
@@ -51,7 +51,7 @@ def create_func(df, alloc_params):
         for x in alloc_params["categorical"]
     ]
     # We need new variables to our dataframe
-    df = pd.concat([df] + [df.eval(x) for x in alloc_params["covariates"]])
+
 
     return partial(_objective, df, alloc_params, value_list)
 
